@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title> 竺毅先森——http://www.axie.cc</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <style>
+        
+        .green{
+            color: green
+        }
+        .red {
+            color: red;
+        }
+        .orange {
+            color: orange;
+        }
+    </style>
+    <link rel="stylesheet" href="./lib/bootstrap.min.css">
+    <script src="./lib/jquery-1.7.2.js"></script>
+    <script src="./lib/bootstrap.js"></script>
+    <script src="vue.js"></script>
+    <script>
+       window.onload=function(){
+        var c=new Vue({
+               el:".container", //不要绑定body/html，
+               data:{
+                   src:"http://www.jxust.edu.cn/images/logo.jpg",
+                   width:"100px",
+                   bule:"blue",
+                   color:"red",
+                   color2:"green",
+                   istrue:"true",
+                   msg:"",
+                   classJson:{
+                       red:true,
+                       green:false
+                   },
+                   style_one:{
+                       color:"orange",
+                   }
+               },
+               methods:{
+                   show:function(event){
+                       window.alert("1");//event.clientX
+                       //阻止冒泡
+                       //event.cancelBubble=true;//（简写：@click.stop 推荐）
+                   },
+                   show2:function(event){
+                      // window.alert("2");
+                   },
+                   show3:function(event){
+                        window.alert("3");//会发现右键后，会带有个默认行为
+                        event.preventDefalult();//阻止默认行为
+                        //；简写：contextmenu.prevent
+                   },
+                   show4:function(event){
+                       alert(event.keyCode);
+                       //console.log(Object.getOwnPropertyNames(event).sort());
+                   } 
+               }
+      });
+    }
+    </script>
+</head>
+<body >
+    test invalid
+    <div class="container"  id="box" >
+        <div v-on:click="show2($event)"> {{src}}</div>
+                <input type="button" value="按钮" @click.stop="show($event)"/><br>
+                <input type="button" value="右键事件" @contextmenu="show3($event)">
+                <input type="text" name="" @keydown="show4($event)" id="">
+                <img v-bind:src="src" :width="width"> <br>
+                <img  :src="src" alt=""> <br>
+                <strong :class="[color2,color]">测试1……</strong><br>
+                <strong :class="{green:istrue}">测试2……{green:istrue}应该这样写,最好不要直接</strong><br>
+                <strong :class="classJson">测试3……{green:istrue}应该这样写</strong><br>
+
+                <strong :style="[style_one]">style1……</strong><br>
+                <strong :style="{green:istrue}">style2……{green:istrue}应该这样写,最好不要直接</strong><br>
+                <strong :style="classJson">style3……{green:istrue}应该这样写</strong><br>
+
+
+                <strong class="blue">测试3……</strong><br>
+                <input type="text" name=""  v-model="msg" id="">
+                <!-- <span>{{msg}}</span><br>
+                <span>{{*msg}}</span><br>
+                <span>{{{msg}}}</span><br> 
+       
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

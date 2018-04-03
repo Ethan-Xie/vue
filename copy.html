@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title> 竺毅先森——http://www.axie.cc</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <style>
+
+    </style>
+    <link rel="stylesheet" href="./lib/bootstrap.min.css">
+    <script src="vue.js"></script>
+    <script src="./lib/vue-resource.js"></script>
+    <script>
+      window.onload=function(){
+        var c=new Vue({
+               el:"#box",
+               methods:{
+                   get:function(){
+                      window.alert("hello");
+                       
+                   }
+               }
+      });
+      }
+    </script>
+</head>
+<body>
+    <div class="container" id="box">
+       <input type="button" value="按钮" @click="get()">
+    </div>
+    <script src="./lib/jquery-1.7.2.js"></script>
+    <script src="./lib/bootstrap.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

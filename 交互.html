@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title> 竺毅先森——http://www.axie.cc</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <style>
+        .gray{
+            background: red;
+        }
+    </style>
+    <link rel="stylesheet" href="./lib/bootstrap.min.css">
+
+    <script>
+      window.onload=function(){
+        var c=new Vue({
+               el:"#box",
+               data:{
+                        mydata:[],
+                        t1:'',
+                        now:-1,
+                        istrue:true,
+                        history:''
+               },
+               methods:{
+                   get:function(){
+                       //window.alert("hello");
+                       this.$http.get('content.txt').then(function(res){
+                            console.log("true");
+                           alert(res.data);
+                       },function(res){
+                            console.log("false");
+                            alert(res.status);
+                            console.log(res);
+                       })
+                   },
+                   post:function(){
+                    this.$http.post('test.php',{a:1},{emlateJSON:true}).then(function(res){
+                            console.log("true");
+                           console.log(res.data);
+                           //console.log(res.data.a); //a
+                           this.mydata.push(res.data.a)
+                       },function(res){
+                            console.log("false");
+                            alert(res.status);
+                            console.log(res);
+                       })
+                },
+                jsonp:function(){
+                    //pubdate  jsonp:"_callback"
+                    this.$http.jsonp('http://cdn.weather.hao.360.cn/sed_api_weather_info.php',{code:101240701},{jsonp:"_callback"}).then((response) => {
+                        console.log("true");
+                           console.log(response.data);
+                           
+                    }, (response) => {
+                        console.log(response.data);
+                            alert(response.status);
+                            console.log(response);
+                    });
+                },
+                jsonp2:function(e){
+                    //排除一些干扰项：
+                    if(e.keyCode == 38 ){
+                        return
+                    }
+                    if(e.keyCode == 13 ){
+                        window.open('https://www.baidu.com?wd='+this.t1)
+                    }
+                    //pubdate  jsonp:"_callback"
+                    if(this.t1 != this.history)
+                    {
+                        this.$http.jsonp('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',{wd:this.t1},{jsonp:"cb"}).then((response) => {
+                            console.log("true");
+                            //把它的值存起来
+                            this.history=this.t1;
+                            console.log(response.data.s);
+                            var arr=response.data.s;
+                            for(j = 0; j < arr.length; j++) {
+                                this.mydata.push(arr[j]);
+                                console.log(arr[j])
+                            }
+                        }, (response) => {
+                            console.log(response.data); 
+                                alert(response.status);
+                                console.log(response);
+                        });
+                    }
+                    
+                },
+                changeDown:function(){
+                    this.now++;
+                    if(this.now==this.mydata.length) this.now=0;
+                    this.t1=this.mydata[this.now];
+                }
+
+               }  
+      });
+      }
+    </script>
+</head>
+<body>
+    <div class="container" id="box">
+       <input type="button" value="get按钮" @click="get()">
+       <input type="button" value="post按钮" @click="post()">
+       <input type="button" value="jsonp按钮" @click="jsonp()">
+       <input type="text" v-model="t1" @keyup="jsonp2($event)" @keydown.down="changeDown()"/>
+        
+       <div>
+           <ul>
+               <li v-for="(value,index) in mydata" :class="{gray:index==now}">{{index}}{{value}}
+                   <span v-show="index==now">{{now}}</span>
+               </li>
+           </ul>
+           <p v-show="mydata.length == 0">暂无数据</p>
+       </div>
+    </div>
+    
+    <script src="vue.js"></script>
+    <script src="./lib/vue-resource.js"></script>
+    <script src="./lib/jquery-1.7.2.js"></script>
+    <script src="./lib/bootstrap.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

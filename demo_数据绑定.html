@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> 竺毅先森——http://www.axie.cc</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <style>
+
+    </style>
+    <script src="vue.js"></script>
+    <script>
+      window.onload=function(){
+          var c=new Vue({
+                el:'#box',//选择器
+                data:{
+                    msg:'welcome vue',
+                    msg2:2,
+                    arr:['apple','orange'],
+                    json:{a:'apple2',b:'pear2'}
+                } ,
+                methods:{
+                    //方法写在这
+                    show:function(){
+                       this.arr.push("tomato");
+                    }
+                }
+            });
+            
+            new Vue({
+                el:"#btn",
+                data:{
+                    msg:"we",
+                    a:true
+                },
+                methods:{
+                    //方法写在这
+                    show:function(){
+                       // alert("1");
+                       this.arr.push("tomato");
+                    }
+                }
+            })
+      }
+    </script>
+</head>
+<body>
+    <!--  双向数据绑定  -->
+    <div id="box"> 
+            <input type="text" v-model="msg" />
+        {{msg}}
+        <br>
+        {{msg2}}
+        <br>
+        <!-- {{$index}}  索引的使用 -->
+        <span v-for="(value,index) in arr">
+            {{index}}.{{value}}
+            <br>
+        </span>
+        <br>
+        <span v-for="(value,key,index) in json"><br>
+            {{index}}.{{key}}.{{value}}
+        </span> 
+            <div>
+                <input type="button" value="添加"  v-on:click="show()">
+            </div>  
+          
+    </div>
+    
+    <!--会没显示 show()-->
+    <div id="btn" v-on:click="a=false">
+        <input type="button" value="按钮">
+        <div style="width: 100px;height:100px ;background-color:red;" v-show="a">
+
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

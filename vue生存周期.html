@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title> 竺毅先森——http://www.axie.cc</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <style>
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+    <link rel="stylesheet" href="./lib/bootstrap.min.css">
+    
+    <script src="vue.js"></script>
+    <script src="./lib/vue-resource.js"></script>
+    <script>
+      window.onload=function(){
+          //创建实例
+        var c=new Vue({
+               el:"#box",
+               data:{
+                   msg:"xie",
+                   a:1,
+                   //b:2
+               },
+               computed:{
+                    b:function(){
+                        //业务逻辑
+                        return this.a;
+                    },
+                    c:{
+                        get:function() {
+                            
+                        },
+                        set:function(res){
+                                this.a=res;
+                        }
+                    }
+               },
+               methods:{
+                   get:function(){
+                      window.alert("hello");
+                       
+                   }
+               },
+               created: function() {
+                   console.log("编译之前");
+               },
+               mounted:function(){
+                   console.log('编译之后');
+
+                   this.$nextTick(function () {
+                    // 代码保证 this.$el 在 document 中
+                    console.log("ready");
+                })
+               },
+               //2.x 已经废除  以上替代
+               ready:function(){
+                   console.log('ready^');
+                     
+               },
+               destroyed:function(){
+                   console.log("销毁")
+               },
+               aa:11
+      });
+        document.onclick=function(){
+           // c.$destroy() ;//显示 销毁
+           c.a=110;
+        }
+
+        //小元素：
+        console.log(c.$el);
+        c.$el.style.background = 'green';
+        //data
+        console.log(c.$data);// data 数据对象
+        //自定义属性
+        //值
+        console.log(c.$options.aa);
+        //方法
+         console.log(c.$options.show());
+        //c.$destroy() ;//显示 销毁
+        
+        //现在数据的状态
+        console.log(c.$log());//请使用 Vue Devtools 感受最佳debug体验。
+
+      }
+    </script>
+</head>
+<body>
+    <div class="container" id="box" v-cloak>
+       <input type="button" v-bind:value="msg" @click="get()"> 
+
+       <span v-text="msg"></span>
+       <div>a=>{{a}} <br/>b=>{{b}}
+        </div>
+    </div>
+    <script src="./lib/jquery-1.7.2.js"></script>
+    <script src="./lib/bootstrap.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
