@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title> 竺毅先森——http://www.axie.cc</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <style>
+
+    </style>
+    <link rel="stylesheet" href="./lib/bootstrap.min.css">
+    <script src="vue.js"></script>
+    <script src="./lib/vue-resource.js"></script>
+    <script>
+            //定义指令
+            Vue.directive('red',
+            {
+                inserted: function (el) {
+                    // 元素调用 focus 获取焦点
+                   // el.focus()
+                   el.style.background = 'green';
+                }
+            }
+            /*
+            function(){
+              //this.el.style.background = 'green';
+          }
+          */);
+          Vue.directive('drag',
+            {
+                inserted: function (el) {
+                    // 元素调用 focus 获取焦点  
+                   el.onmousedown = function(el){
+                       var now=el;
+                       var disX=el.clientX-el.offsetLeft;
+                       var disY=el.clientY-el.offsetTop;
+
+                       document.onmousemove=function(el2){
+                           var l=el2.clientY-disX;
+                           var t=el2.clientY-disY;
+
+                       }
+                   }
+                }
+            } );
+      window.onload=function(){ 
+        var c=new Vue({
+               el:"#box",
+               data:{
+                    a:"hello",
+                    b:"drag"
+               },
+               methods:{
+                   get:function(){
+                      window.alert("hello");
+                       
+                   }
+               }
+      });
+      }
+    </script>
+</head>
+<body>
+    <div class="container" id="box">
+       <input type="button" value="按钮" @click="get()">
+       <span v-text="a" v-red></span><br>
+       <div v-text="b" style="width:100px;heigh:100px;background:green;position:absolute;right:0;top:0" v-drag></div>
+    </div>
+    <script src="./lib/jquery-1.7.2.js"></script>
+    <script src="./lib/bootstrap.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

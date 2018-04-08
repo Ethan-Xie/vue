@@ -16,10 +16,43 @@
     <script src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
     <script>
       window.onload=function(){
+          //自定义过滤器
+          Vue.filter('toDou',function(input){
+              alert(input);
+          });
+          //html  过滤器
+          Vue.filter('filterHtml',{
+              read:function(input){
+              return input.replace(/<[^<+]/g,'');
+            },
+            write:function(val){
+                console.log("write……");
+            }
+          });
+
+          //自定义元素过滤器(标签) 1. x
+          /*
+            Vue.elementDirective('xieTest',{
+                bind:function(){
+                    this.el.style.background='red';
+                }
+            });
+          */
+
+          // 定义
+            var MyComponent = Vue.extend({
+            template: '<div>A custom component!</div>'
+            })
+
+            // 注册
+            Vue.component('my-component', MyComponent);
+
+
         var c=new Vue({
                el:"#box",
                data:{
-                    arr:[1,2,3,'name']
+                    arr:[1,2,3,'name'],
+                    a:"这里"
                },
                methods:{
                    get: _.debounce(function () {
@@ -50,7 +83,11 @@
                 {{value}}
            </li>
        </ul>
-       <p v-for="(user) in orderedUsers">{{ user }}</p>
+       <span>{{a |toDou}}</span>
+       <!-- <span>{{a |filterHtml}}</span> -->
+
+       <xieTest>hello</xieTest>
+       <my-component></my-component>
     </div>
     <script src="./lib/jquery-1.7.2.js"></script>
     <script src="./lib/bootstrap.js"></script>
