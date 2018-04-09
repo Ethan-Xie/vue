@@ -347,7 +347,75 @@ directives: {
   }
 }
 ```
+- 示例
+```
+    <script src="vue.js"></script>
+    <script src="./lib/vue-resource.js"></script>
+    <script>
+            //定义指令
+            Vue.directive('red',
+            {
+                inserted: function (el) {
+                    // 元素调用 focus 获取焦点
+                   // el.focus()
+                   el.style.background = 'green';
+                }
+            }
+            /*
+            function(){
+              //this.el.style.background = 'green';
+          }
+          */);
+          Vue.directive('drag',
+            {
+                inserted: function (el) {
+                    // 元素调用 focus 获取焦点  
+                   el.onmousedown = function(el){
+                       var now=el;
+                       var disX=el.clientX-el.offsetLeft;
+                       var disY=el.clientY-el.offsetTop;
 
+                       document.onmousemove=function(el2){
+                           var l=el2.clientY-disX;
+                           var t=el2.clientY-disY;
+                            now.style.left=l+'px';
+                            now.style.top=t+'px';
+                       };
+                       document.onmouseup=function(){
+                           document.onmousemove=null;
+                           document.onmouseup=null;
+                       }
+                   }
+                }
+            } );
+      window.onload=function(){ 
+        var c=new Vue({
+               el:"#box",
+               data:{
+                    a:"hello",
+                    b:"drag"
+               },
+               methods:{
+                   get:function(){
+                      window.alert("hello");
+                       
+                   }
+               }
+      });
+      }
+    </script>
+</head>
+<body>
+    <div class="container" id="box">
+       <input type="button" value="按钮" @click="get()">
+       <span v-text="a" v-red></span><br>
+       <div v-text="b" v-drag style="width:100px;heigh:100px;background:green;position:absolute;right:0;top:0" v-drag></div>
+    </div>
+    <script src="./lib/jquery-1.7.2.js"></script>
+    <script src="./lib/bootstrap.js"></script>
+</body>
+</html>
+```
 ### 自定义，元素指令
 - 用处不大，了解一下
 ```
@@ -368,3 +436,50 @@ directives: {
             // 注册
             Vue.component('my-component', MyComponent);
 ```
+
+## @keydown.up  @keydown.enter 
+- keydown.a/b/c/d
+问题就是,ctrl
+```
+docment.onkeydown=function(ev){
+    console.log(ev.keyCode);//17
+}
+```
+-  ctrl的指定为：keydown.17
+
+```
+        //自定义键盘信息  1.x
+       // Vue.directive('on').keyCodes.myenter=17;
+        //  2.x
+        // v-on:keyup.f1 不可用
+        Vue.config.keyCodes.myenter = 17;
+```
+
+## 数据监听变化
+- 1.x
+vm.$el/$mount/$options/...
+vm.$watch(name,fnCb)
+
+- 深度  
+vm.$watch(name,fnCb,{deep:true})
+
+a:{name:'hello',age:16}
+vm.a.name='aaa'
+```
+
+      c.$watch('a',function(){
+       // window.alert('发生了变化');
+            this.a=this.a+100;
+            return false;
+        })
+
+      document.onclick=function(){
+          c.a=1;
+      }
+```
+
+===================4.9===============================
+- 引入 vue.js
+- bower -> () 包管理器
+- vue -->  过渡（动画）
+
