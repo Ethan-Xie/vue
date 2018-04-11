@@ -480,6 +480,32 @@ vm.a.name='aaa'
 
 ===================4.9===============================
 - 引入 vue.js
-- bower -> () 包管理器
-- vue -->  过渡（动画）
+- bower -> () 包管理器 npm
+    npm install bower -g
+    验证：bower --version
+    
+
+
+- vue -->  过渡（动画） 
+本质上是css3：transtion ,animation
+<div id="div1" v-show="bsign" transition="fade" ></div>
+
+style:
+ .fade-transition{
+     transition:1s all ease;
+ }
+ .fade-enter{
+     opacity:0;
+ }
+  .fade-leave{
+       opacity:0;
+       transform:translateX(200px);
+  }
+- 动画：
+.fade-transition{
+
+}
+- 进入 
+- 离开
+
 
