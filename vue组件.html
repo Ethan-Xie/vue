@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title> 竺毅先森 —— www.axie.cc</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <style>
+        
+    </style>
+    <link rel="stylesheet" href="./lib/bootstrap.min.css">
+    <script src="vue.js"></script>
+    <script src="./lib/vue-resource.js"></script>
+    <script>
+
+        //!!组件的一种方式(全局组件)  hello vue
+        var vuehead=Vue.extend({
+            /* 必须写成函数，重点！！！
+            data:{
+                test:"我是vuehead.data的test值"
+            },
+            */
+            data(){
+               return {
+                   test:"我是vuehead.data的test值"
+               } 
+            },
+            methods: {
+                change(){
+                    alert(1);
+                }
+            },
+            template:"<h3 @click='change()'>{{test}}</h3>"
+        });
+        //console.log(header);
+        Vue.component('vuehead',vuehead);
+
+        //!!第二种方式
+        Vue.component('vueheads',{
+            template:'<h3>我是标题</h3>'
+        });
+
+
+      window.onload=function(){
+            var c=new Vue({
+                el:"#box",
+                data:{
+                    test:"我是c.data的test值"
+                },
+                methods:{
+                    get:function(){
+                        window.alert("hello");
+                        
+                    }
+                }
+        });
+      }
+    </script>
+</head>
+<body>
+    <div class="container" id="box">
+       <input type="button" value="按钮" @click="get()">
+       <vueHead></vueHead>
+       <vueheads></vueheads>
+    </div>
+    <script src="./lib/jquery-1.7.2.js"></script>
+    <script src="./lib/bootstrap.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

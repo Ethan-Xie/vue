@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="./lib/bootstrap.min.css">
+	<link rel="stylesheet" href="./lib/animate.css">
+    <script src="vue.js"></script>
+    <script src="./lib/vue-resource.js"></script>
+	<style>
+		#div1{
+			width:100px;
+			height:100px;
+			background: green;
+		} 
+	</style>
+</head>
+<body>
+	<div id="box">
+		<input type="button" value="按钮" @click="toggle">
+		<transition enter-active-class="zoomInLeft" leave-active-class="zoomOutRight">
+			<p v-show="bSign" class="animated">hello</p>
+		  </transition>
+		<!-- <div id="div1" v-show="bSign" class="animated" transition="bounce"></div> -->
+	</div>
+
+	<script>
+		new Vue({
+			el:'#box',
+			data:{
+				bSign:true
+			},
+			methods:{
+				/*toggle:function(){
+					alert(1);
+				}*/
+				toggle(){
+					this.bSign=!this.bSign;
+				}
+			},
+			transitions:{
+				//定义所有动画名称
+				bounce:{
+					enterClass:"zoomInleft",
+					leaveClass:'zoomOutRight'
+				}
+			}
+		});
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
