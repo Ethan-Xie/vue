@@ -556,4 +556,5 @@ style:
 
 ```
 
-## 
+## 组件
+     Vue.component('vuehead',vuehead);

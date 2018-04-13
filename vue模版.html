@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title> 竺毅先森 —— www.axie.cc</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <style>
+        
+    </style>
+    <link rel="stylesheet" href="./lib/bootstrap.min.css">
+    <script src="vue.js"></script>
+    <script src="./lib/vue-resource.js"></script>
+
+    
+</head>
+<body>
+    <div class="container" id="box">
+        <!--  运用template 将会覆盖全部数据  -->
+        <my-data></my-data>
+       <input type="button" value="按钮" @click="get()">
+    </div>
+    <script src="./lib/jquery-1.7.2.js"></script>
+    <script src="./lib/bootstrap.js"></script>
+    <template id="aaa">
+        <h1>我是template 的标题+{{test}} </h1>
+        <ul>
+            <li></li>
+        </ul>
+    </template>
+
+    <script>  
+      window.onload=function(){ 
+            var c=new Vue({
+                el:"#box",
+                data:{
+                    test:"我是c.data的test值"
+                },
+                methods:{
+                    get:function(){
+                        window.alert("hello");
+                        
+                    }
+                },
+                components: {
+                    'my-data':{
+                            data(){
+                                return {
+                                    test:"我是 .data的test值",
+                                    arr:['apple','banana','orange']
+                                } 
+                            },  
+                            methods: {
+                                change(){
+                                    alert(1);
+                                }
+                            },
+                            template:'#aaa'
+                    }
+                }
+                
+        });     
+      }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

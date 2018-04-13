@@ -25,7 +25,7 @@
                return {
                    test:"我是vuehead.data的test值"
                } 
-            },
+            },  
             methods: {
                 change(){
                     alert(1);
@@ -42,7 +42,11 @@
         });
 
 
-      window.onload=function(){
+        //！！！ 局部声明：
+        var vuescope=Vue.extend({ 
+            template:"<h3  >我是局部</h3>"
+        });
+      window.onload=function(){ 
             var c=new Vue({
                 el:"#box",
                 data:{
@@ -53,8 +57,19 @@
                         window.alert("hello");
                         
                     }
+                },
+                /*
+                components: {
+                    //局部组件
+                    'scope':vuescope
+                },*/
+                //第二种方式：
+                components:{
+                    'my-aaa':{
+                        template:"<h3>我是第二种方式的，局部</h3>"
+                    }
                 }
-        });
+        });     
       }
     </script>
 </head>
@@ -63,6 +78,8 @@
        <input type="button" value="按钮" @click="get()">
        <vueHead></vueHead>
        <vueheads></vueheads>
+       <scope></scope>
+       <my-aaa></my-aaa>
     </div>
     <script src="./lib/jquery-1.7.2.js"></script>
     <script src="./lib/bootstrap.js"></script>
