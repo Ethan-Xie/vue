@@ -558,3 +558,136 @@ style:
 
 ## 组件
      Vue.component('vuehead',vuehead);
+```
+    <link rel="stylesheet" href="./lib/bootstrap.min.css">
+    <script src="vue.js"></script>
+    <script src="./lib/vue-resource.js"></script>
+    <script>
+
+        //!!组件的一种方式(全局组件)  hello vue
+        var vuehead=Vue.extend({
+            /* 必须写成函数，重点！！！
+            data:{
+                test:"我是vuehead.data的test值"
+            },
+            */
+            data(){
+               return {
+                   test:"我是vuehead.data的test值"
+               } 
+            },  
+            methods: {
+                change(){
+                    alert(1);
+                }
+            },
+            template:"<h3 @click='change()'>{{test}}</h3>"
+        });
+        //console.log(header);
+        Vue.component('vuehead',vuehead);
+
+        //!!第二种方式
+        Vue.component('vueheads',{
+            template:'<h3>我是标题</h3>'
+        });
+
+
+        //！！！ 局部声明：
+        var vuescope=Vue.extend({ 
+            template:"<h3  >我是局部</h3>"
+        });
+      window.onload=function(){ 
+            var c=new Vue({
+                el:"#box",
+                data:{
+                    test:"我是c.data的test值"
+                },
+                methods:{
+                    get:function(){
+                        window.alert("hello");
+                        
+                    }
+                },
+                /*
+                components: {
+                    //局部组件
+                    'scope':vuescope
+                },*/
+                //第二种方式：
+                components:{
+                    'my-aaa':{
+                        template:"<h3>我是第二种方式的，局部</h3>"
+                    }
+                }
+        });     
+      }
+    </script>
+</head>
+<body>
+    <div class="container" id="box">
+       <input type="button" value="按钮" @click="get()">
+       <vueHead></vueHead>
+       <vueheads></vueheads>
+       <scope></scope>
+       <my-aaa></my-aaa>
+    </div>
+    <script src="./lib/jquery-1.7.2.js"></script>
+    <script src="./lib/bootstrap.js"></script>
+</body>
+```
+
+## 模版
+1.单独放在某个地方：template:' <h1 @click="change()">我是template 的标题+{{test}} </h1>'
+2.
+```
+<template id="aaa">
+        <h1 @click="change()">我是template 的标题+{{test}} </h1>
+        <ul>
+            <li></li>
+        </ul>
+    </template>
+
+    <script type="x-template"  id="bbb">
+                <h1 @click="change()">我是template 的标题+{{test}} </h1>
+        <ul>
+            <li></li>
+        </ul>
+    </script>
+
+    <script>  
+      window.onload=function(){ 
+            var c=new Vue({
+                el:"#box",
+                data:{
+                    test:"我是c.data的test值"
+                },
+                methods:{
+                    get:function(){
+                        window.alert("hello");
+                    }
+                },
+                components: {
+                    'my-data':{
+                            data(){
+                                return {
+                                    test:"我是 .data的test值",
+                                    arr:['apple','banana','orange']
+                                } 
+                            },  
+                            methods: {
+                                change(){
+                                    alert(1);
+                                }
+                            },
+                            template:'#bbb'
+                    }
+                }
+                
+        });     
+      }
+    </script>
+```
+
+- 动态组件
+ <component :is="组件名称"></component>
+
