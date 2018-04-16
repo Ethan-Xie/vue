@@ -691,3 +691,94 @@ style:
 - 动态组件
  <component :is="组件名称"></component>
 
+
+- 父子主键
+
+```
+<body>
+    <div class="container" id="box">
+        <!--  运用template 将会覆盖全部数据  -->
+        <my-data>
+            
+        </my-data>
+       <input type="button" value="按钮" @click="get()">
+    </div>
+    <script src="./lib/jquery-1.7.2.js"></script>
+    <script src="./lib/bootstrap.js"></script>
+
+    <script>  
+      window.onload=function(){ 
+            var c=new Vue({
+                el:"#box",
+                data:{
+                    test:"我是c.data的test值"
+                },
+                methods:{
+                    get:function(){
+                        window.alert("hello");
+                    }
+                },
+                components: {
+                    'my-data':{
+                        //Component template should contain exactly one root element
+                        //只能有一个根元素
+                        //这样在2.x 中 template:"<h3>我是my-data</h3><bb></bb>",
+                        data:function(){
+                            return{
+                                msg:'xiethan'
+                            } 
+                        },
+                        template:"<h3>我是my-data{{msg}}<bb></bb></h3>",
+                            components: {
+                                    'bb':{ 
+                                               template:"<h3>我是my-bb</h3>"
+                                            }
+                            }
+                    }
+                }
+                
+        });     
+      }
+    </script>
+</body>
+</html>
+<!-- 
+var allComps = {};
+allComps['CompB'] = {
+  name: 'comp-b',
+  props: ['level'],
+  template: `<div>
+    B{{level}}
+    <div v-if="level<11111">
+      <comp-a :level="level+1"></comp-a>
+    </div>
+  </div>`,
+  components: allComps
+
+};
+allComps['CompA'] = {
+  name: 'comp-a',
+  props: ['level'],
+  template: `<div>
+    A{{level}}
+    <div v-if="level<11111">
+      <comp-b :level="level+1"></comp-b>
+    </div>
+  </div>`,
+  components: allComps
+};
+allComps['App'] = {
+  template: '<div>Start<comp-a level="1"></comp-a></div>',
+  components: allComps
+};
+
+var app = new Vue({
+  el: '#app',
+  components: allComps
+});
+
+ -->
+ ```
+
+ ## 数据通信
+  

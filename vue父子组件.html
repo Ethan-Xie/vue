@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title> 竺毅先森 —— www.axie.cc</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <style>
+        
+    </style>
+    <link rel="stylesheet" href="./lib/bootstrap.min.css">
+    <script src="vue.js"></script>
+    <script src="./lib/vue-resource.js"></script>
+
+    
+</head>
+<body>
+    <div class="container" id="box">
+        <!--  运用template 将会覆盖全部数据  -->
+        <h1>{{test}}</h1>
+        <my-data>
+                <div>
+                     111  我其实会被覆盖
+                </div>
+        </my-data>
+       <input type="button" value="按钮" @click="get()">
+    </div>
+    <script src="./lib/jquery-1.7.2.js"></script>
+    <script src="./lib/bootstrap.js"></script>
+
+    <script type="x-template"  id="bbb">
+            <h3>2我是my-data{{msg}}
+                <bb :m="msg" :my-msg="msg"></bb>
+            </h3>
+        </script>
+    <script>  
+      window.onload=function(){ 
+            var c=new Vue({
+                el:"#box",
+                data:{
+                    test:"我是c.data的test值"
+                },
+                methods:{
+                    get:function(){
+                        window.alert("hello");
+                    }
+                },
+                components: {
+                    'my-data':{
+                        //Component template should contain exactly one root element
+                        //只能有一个根元素
+                        //这样在2.x 中 template:"<h3>我是my-data</h3><bb></bb>",
+                        data:function(){
+                            return{
+                                msg:'我是my-data的msg值'
+                            } 
+                        },
+                        //template:"<h3>我是my-data{{msg}}<bb :m={{msg}}></bb></h3>",
+                        template:"#bbb",
+                            components: {
+                                    'bb':{ 
+                                            props: ['m',"myMsg"],
+                                            //{ 'm':String   //Array  Number这样可以指定传入的类型，如果类型不对，会警告
+                                           // default: [0,0,0] //这样可以指定默认的值 }, 
+                                               template:"<h3>---{{m}}--我是my-bb</h3>"
+                                            }
+                            }
+                    }
+                }
+                
+        });     
+      }
+    </script>
+</body>
+</html>
+<!-- 
+var allComps = {};
+allComps['CompB'] = {
+  name: 'comp-b',
+  props: ['level'],
+  template: `<div>
+    B{{level}}
+    <div v-if="level<11111">
+      <comp-a :level="level+1"></comp-a>
+    </div>
+  </div>`,
+  components: allComps
+
+};
+allComps['CompA'] = {
+  name: 'comp-a',
+  props: ['level'],
+  template: `<div>
+    A{{level}}
+    <div v-if="level<11111">
+      <comp-b :level="level+1"></comp-b>
+    </div>
+  </div>`,
+  components: allComps
+};
+allComps['App'] = {
+  template: '<div>Start<comp-a level="1"></comp-a></div>',
+  components: allComps
+};
+
+var app = new Vue({
+  el: '#app',
+  components: allComps
+});
+
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

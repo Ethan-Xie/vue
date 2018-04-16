@@ -24,15 +24,16 @@
     <script src="./lib/jquery-1.7.2.js"></script>
     <script src="./lib/bootstrap.js"></script>
     <template id="aaa">
-        <h1 @click="change()">我是template 的标题+{{test}} </h1>
+        <h1 @click="change()">aaa我是template 的标题+{{test}} </h1>
         <ul>
             <li></li>
         </ul>
     </template>
 
     <script type="x-template"  id="bbb">
-                <h1 @click="change()">我是template 的标题+{{test}} </h1>
+                
         <ul>
+                <h1 @click="change()">bbb我是template 的标题+{{test}} </h1>
             <li></li>
         </ul>
     </script>
@@ -51,7 +52,7 @@
                 },
                 components: {
                     'my-data':{
-                            data(){
+                            data:function(){
                                 return {
                                     test:"我是 .data的test值",
                                     arr:['apple','banana','orange']
