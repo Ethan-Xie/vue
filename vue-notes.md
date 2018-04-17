@@ -781,4 +781,142 @@ var app = new Vue({
  ```
 
  ## 数据通信
+- 子元素获取父组件 数据
+通过属性，传递
+```
+<script type="x-template"  id="bbb">
+            <h3>2我是my-data{{msg}}
+                <bb :m="msg" :my-msg="msg"></bb>
+            </h3>
+        </script>
+    <script>  
+      window.onload=function(){ 
+            var c=new Vue({
+                el:"#box",
+                data:{
+                    test:"我是c.data的test值"
+                },
+                methods:{
+                    get:function(){
+                        window.alert("hello");
+                    }
+                },
+                components: {
+                    'my-data':{
+                        //Component template should contain exactly one root element
+                        //只能有一个根元素
+                        //这样在2.x 中 template:"<h3>我是my-data</h3><bb></bb>",
+                        data:function(){
+                            return{
+                                msg:'我是my-data的msg值'
+                            } 
+                        },
+                        //template:"<h3>我是my-data{{msg}}<bb :m={{msg}}></bb></h3>",
+                        template:"#bbb",
+                            components: {
+                                    'bb':{ 
+                                            props: ['m',"myMsg"],
+                                            //{ 'm':String   //Array  Number这样可以指定传入的类型，如果类型不对，会警告
+                                           // default: [0,0,0] //这样可以指定默认的值 }, 
+                                               template:"<h3>---{{m}}--我是my-bb</h3>"
+                                            }
+                            }
+                    }
+                }
+                
+        });     
+      }
+    </script>
+</body>
+```
+
+- 父元素获取子组件 数据
+子组件把自己的数据，发送到父级
+vm.$emit(事件名，数据)
+v-on:  @
+```
+methods:{
+            send:function(){
+                //获取子元素数据 
+                this.$emit('child_msg',this.a);
+            }
+        },
+
+     <h3 >2我是my-data{{msg}}
+                <bb :m="msg" :my-msg="msg" @child_msg='get'></bb>
+     </h3>
   
+     methods:{
+                            get(msg){
+                                //获取子元素数据 
+                               //console.log('值：'+msg);
+                                this.msg=msg;
+                            }
+            },
+```
+
+- 其它方式：
+vm.$dispatch(事件名，数据)        子级向父级发送数据
+vm.$broadcast(事件名，数据)       父级向子级广播数据
+
+在vue 2.x 已经废除。
+
+
+
+- slot 的使用：
+<slot>slot:</slot>
+
+
+### 路由
+vue  ->    SPA应用，单页面运用
+    vue-resouce   交互
+    vue-router      路由
+根据不同url地址，出现不同的效果
+
+0.x 与 2.x 的区别： https://segmentfault.com/a/1190000006623100
+
+入口文件（ main.js ） Vue.js 初始化的时要加上 render: (h) => h(App) 方法。
+url 配置。 vue-router 2 的路由定义不一样了，仿照文档修改就好。
+不支持 v-link ，需要改用 <router-link :to="">。注意这里是 :to，而原来 v-link 不需要 :。
+ready 事件改为 mounted 。生命周期 hook 变化可以参考这里： http://vuefe.cn/guide/migration.html#生命周期钩子
+不支持 prop: defaultValue 写法了，得改成 prop: {type: YourType, default: defaultValue}。
+不建议修改 props ， Vue 2.0 中将修改 props 标记为不规范行为，会产生 warning 。
+$destroy 无法删除子组件，作者表示不建议这样做，应当在父组件中删除。我这里改起来比较麻烦，就手动删除了 DOM ，然后 $destroy 。
+
+```
+<div class="container" id="box">
+       <ul>
+           <li><a href="{path:'/home'}">主页</a></li>
+           <li><a href="{path:'/new'}">新闻</a></li>
+       </ul>
+       <div>
+           <router-view name="path"></router-view>
+       </div>
+    </div>
+```
+
+- 多级嵌套：
+
+```
+            //5 关联
+            router.map({
+                'home':{
+                    component:Home,
+                    subRoutes:{
+                        '/login':{
+                            component:{
+                                template:"<h2>登录模块</h2>"
+                        },
+                    }
+                    }
+                },
+                'new':{
+                    component:New  //访问的是new 组件
+                }
+
+            })
+```
+
+
+### v2.x  路由
+跳转：   https://blog.csdn.net/heliumlau/article/details/61649491

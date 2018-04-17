@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title> 竺毅先森 —— www.axie.cc</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <style>
+        .v-link-active{
+            color:orange;
+            font-size: 20px;
+        }
+    </style>
+    <link rel="stylesheet" href="./lib/bootstrap.min.css">
+    <script src="vue1.js"></script>
+    <script src="./lib/vue-resource.js"></script>
+    <script src="./lib/vue-router.js"></script>
+
+</head>
+<body>
+    <div class="container" id="box">
+       <ul>
+           <li><a v-link="{path:'/home'}">主页</a></li>
+           <li><a v-link="{path:'/new'}">新闻</a></li>
+       </ul>
+       <div>
+           <router-view></router-view>
+       </div>
+    </div>
+    <template id="home">
+        <h3>我是主页</h3>
+        <div>
+            <a v-link="{path:'/home/login'}">登录</a>
+            <a v-link="{path:'/home/reg'}">注册</a>
+        </div>
+        <div>
+                <router-view></router-view>
+        </div>
+    </template>
+    <template id="new">
+            <h3>我是新闻</h3>
+            <div>
+                    <a v-link="{path:'/new/detail/001'}">描述001的新闻</a>
+                    <a v-link="{path:'/new/detail/002'}">描述002的新闻</a>
+                </div>
+                <div>
+                        <router-view></router-view>
+                </div>
+    </template>
+    <template id="detail">
+            <h3>xxxx{{$route.params | json }}</h3>
+    </template>
+    <script>
+           
+          window.onload=function(){
+               //1. 准备一个根组件
+            var App = Vue.extend();
+    
+            //2. Home News 组件都准备
+            var Home=Vue.extend({
+                template:'#home'
+            });
+
+            //3. news  组件
+            var New=Vue.extend({
+                template:'#new'
+            });
+
+            //  detail  组件
+            var Detail=Vue.extend({
+                template:'#detail'
+            });
+
+            //4 准备路由
+            var router=new VueRouter();
+            //5 关联
+            router.map({
+                'home':{
+                    component:Home,
+                    subRoutes:{
+                        '/login':{
+                            component:{
+                                template:"<h2>登录模块</h2>"
+                        },
+                    }
+                    }
+                },
+                'new':{
+                    component:New,  //访问的是new 组件
+                    subRoutes:{
+                        '/detail/:id':{
+                            component:Detail,
+                    }
+                }
+                }
+
+            })
+
+            //6. 跳转
+            router.redirect({
+                '/':'/home'
+            })
+
+            //启动路由
+            router.start(App,'#box');
+          }
+        </script>
+    <script src="./lib/jquery-1.7.2.js"></script>
+    <script src="./lib/bootstrap.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

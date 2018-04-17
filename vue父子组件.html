@@ -30,8 +30,9 @@
     <script src="./lib/bootstrap.js"></script>
 
     <script type="x-template"  id="bbb">
-            <h3>2我是my-data{{msg}}
-                <bb :m="msg" :my-msg="msg"></bb>
+       
+            <h3  > <slot>slot:</slot>2我是my-data{{msg}}
+                <bb :m="msg" :my-msg="msg" @child_msg='get'></bb>
             </h3>
         </script>
     <script>  
@@ -43,7 +44,7 @@
                 },
                 methods:{
                     get:function(){
-                        window.alert("hello");
+                        window.alert("你好");
                     }
                 },
                 components: {
@@ -56,14 +57,34 @@
                                 msg:'我是my-data的msg值'
                             } 
                         },
+                        methods:{
+                            get(msg){
+                                //获取子元素数据 
+                               //console.log('值：'+msg);
+                                this.msg=msg;
+                            }
+                        },
                         //template:"<h3>我是my-data{{msg}}<bb :m={{msg}}></bb></h3>",
                         template:"#bbb",
                             components: {
-                                    'bb':{ 
+                                    'bb':{
+                                            data:function(){
+                                                return{
+                                                    msg:'*msg*',
+                                                    a:'bb'
+                                                }
+                                            },
+                                            methods:{
+                                                    send:function(){
+                                                        //获取子元素数据 
+                                                     this.$emit('child_msg',this.a);
+                                                   // window.alert("hello，son");
+                                                    }
+                                                },
                                             props: ['m',"myMsg"],
                                             //{ 'm':String   //Array  Number这样可以指定传入的类型，如果类型不对，会警告
                                            // default: [0,0,0] //这样可以指定默认的值 }, 
-                                               template:"<h3>---{{m}}--我是my-bb</h3>"
+                                               template:"<h3 @click='send'><br/>---{{m}}--我是my-bb{{msg}}</h3>"
                                             }
                             }
                     }
