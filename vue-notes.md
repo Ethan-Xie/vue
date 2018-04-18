@@ -916,7 +916,81 @@ $destroy 无法删除子组件，作者表示不建议这样做，应当在父�
 
             })
 ```
+- param 参数
+```
+ 'new':{
+                    component:New,  //访问的是new 组件
+                    subRoutes:{
+                        '/detail/:id':{
+                            component:Detail,
+                        }
+                    }
+                }
+
+    <template id="new">
+            <h3>我是新闻</h3>
+            <div>
+                    <a v-link="{path:'/new/detail/001?a=1&b=2'}">描述001的新闻</a>
+                    <a v-link="{path:'/new/detail/002'}">描述002的新闻</a>
+                </div>
+                <div>
+                        <router-view></router-view>
+                </div>
+    </template>
+    <template id="detail">
+            <h3>xxxx{{$route.params | json }}</h3>
+            <h3>{{$route.path}}</h3>
+            <h3>{{$route.query | json }}</h3>
+    </template>
+```
+- 如有其它信息：
+  /detail/:id/age/:age
+    {{$route.params | json}}    当前参数
+    {{$route.path}}             当前路径
+    {{$route.query | json}}     url参数
+
 
 
 ### v2.x  路由
 跳转：   https://blog.csdn.net/heliumlau/article/details/61649491
+
+
+
+
+### vue-loader
+    其它 loader -> css  url  html  
+    后台 node.js   -> require exports
+    webpack  模块加载器,一切都是模块
+     
+     require('style.css')   ->css-loader、style-loader
+
+     基于webpack
+
+
+### a.vue/b.vue
+vue文件： 放置的就是vue组件
+
+```
+<template>
+    html
+</template>
+<style>
+    html
+</style>
+
+<script>
+    js  （平时 babel-loader）
+</script>
+```
+简单的目录结构：
+        |-index
+        | main.js           入口文件
+        |- App.vue          vue文件
+        |-package.json      工程文件（项目依赖，名称，配置）
+        |- webpack.config.js   webpack 配置文件
+
+
+- es6:  模块化开发
+    导出模块：export default{}
+
+    引入模块：import 使用名 from 地址
