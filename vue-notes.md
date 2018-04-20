@@ -994,3 +994,38 @@ vue文件： 放置的就是vue组件
     导出模块：export default{}
 
     引入模块：import 使用名 from 地址
+- webpack 准个工作
+更新最新版本的npm ：npm install -g npm
+但是这种安装方式比较慢，推荐使用国内镜像来安装，所以我们先设置 cnpm：
+npm install -g cnpm --registry=https://registry.npm.taobao.org
+
+- webpack 4:
+npm install --save-dev webpack webpack-cli
+mode/–mode参数:
+```
+// webpack.config.js
+module.exports = {
+    mode: "production",
+    // ...
+}
+```
+- vue 的准备工作
+App.vue  -> 变成正常的代码：   vue-loader
+
+- vue/vue-loader 更新
+    cnpm install --save-dev vue-loader
+    cnpm install --save  vue  (dependencies 必须的框架)
+查看：npm ls vue-loader --save-dev
+依赖：css-loader  vue-template-compiler  vue-style-loader  vue-hot-reload-api
+
+- 安装babel
+简单：npm install babel-cli -g
+        npm install --save-dev  babel-preset-es2015
+复杂：babel-loader babel-core babel-plugin-transfore-runtime
+babel-preset-es2015  babel-runtime
+
+- npm 版本信息查看
+ npm info vue-loader 
+所有的jquery版本信息    npm view vue-loader versions
+最新的版本    npm view vue-loader version
+现在指定版本：vue-loader@14.2.2  
