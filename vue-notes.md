@@ -954,7 +954,29 @@ $destroy 无法删除子组件，作者表示不建议这样做，应当在父�
 ### v2.x  路由
 跳转：   https://blog.csdn.net/heliumlau/article/details/61649491
 
+```
+除了使用创建a标签来定义导航链接，我们还可以借助router的实例方法，通过编写代码来实现。 
+router.push() 
+这种方法会向history栈中添加记录 
+router.push() ==
 
+// 字符串
+router.push('home')
+
+// 对象
+router.push({ path: 'home' })
+
+// 命名的路由
+router.push({ name: 'user', params: { userId: 123 }})
+
+// 带查询参数，变成 /register?plan=private
+router.push({ path: 'register', query: { plan: 'private' }})
+
+router.replace(location) 
+router.replace(location) == 
+router.go(n) 
+这个方法的参数是一个整数，意思是在history记录中向前或者后退多少步，类似window.history.go(n)
+```
 
 
 ### vue-loader
