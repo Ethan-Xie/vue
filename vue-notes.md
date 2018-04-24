@@ -1051,3 +1051,18 @@ babel-preset-es2015  babel-runtime
 所有的jquery版本信息    npm view vue-loader versions
 最新的版本    npm view vue-loader version
 现在指定版本：vue-loader@14.2.2  
+   
+
+-----------------------------------
+## 如何运行此项目：
+    1.npm install 或者 cnpm install
+    2.npm run dev (package.json scripts {}) 错误码： Address in use error (EADDRINUSE)：eaddrinuse
+
+## 配合loader及router的使用
+  1.下载vue-router 模块
+    cnpm install vue-router@3.x
+  2.import router from './router'
+
+
+
+
