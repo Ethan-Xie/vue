@@ -1064,5 +1064,15 @@ babel-preset-es2015  babel-runtime
   2.import router from './router'
 
 
-
+## vue-cli 的使用规则：
+ vue-cli---vue脚手架
+        提供了基本的结构
+帮我们配好了，本身集成很多模版： 
+     1.npm install -g vue-cli  全局安装脚手架
+     2.npm install -g cnpm --registry=https://registry.npm.taobao.org  换国内镜像
+     3.vue -V  vue的版本
+     4.vue init webpack vue-project  初始化一个vue的项目 vue-project
+     5.cnpm install  安装依赖
+     6.npm run dev   浏览器查看项目
+     7.
 
