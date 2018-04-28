@@ -2,7 +2,7 @@
   <div id="app">
     <img src="./assets/logo.png">
     <ul>
-      <li>my name is list</li>
+      <li>{{msg}}</li>
     </ul>
     <router-view/>
   </div>
@@ -10,7 +10,12 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data () {
+    return {
+      msg: '我是数据'
+    }
+  }
 }
 </script>
 
