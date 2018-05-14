@@ -17,7 +17,7 @@
 </head>
 <body>
     <div class="container" id="box">
-        <!--  运用template 将会覆盖全部数据  -->
+        <!--  运用template 将会覆盖全部数据  要有根元素，包裹住所有元素 -->
         <h1>{{test}}</h1>
         <my-data>
                 <div>
@@ -31,7 +31,7 @@
 
     <script type="x-template"  id="bbb">
        
-            <h3  > <slot>slot:</slot>2我是my-data{{msg}}
+            <h3 > <slot>slot:</slot>2我是my-data{{msg}}
                 <bb :m="msg" :my-msg="msg" @child_msg='get'></bb>
             </h3>
         </script>
@@ -42,9 +42,18 @@
                 data:{
                     test:"我是c.data的test值"
                 },
+                mounted(){
+                    this.b=this.msg
+                },
                 methods:{
                     get:function(){
                         window.alert("你好");
+                    },
+                    giveData:{
+                        a:'hello world'
+                    },
+                    change(){
+                        this.b.a=''
                     }
                 },
                 components: {
@@ -63,7 +72,7 @@
                                //console.log('值：'+msg);
                                 this.msg=msg;
                             }
-                        },
+                        }, 
                         //template:"<h3>我是my-data{{msg}}<bb :m={{msg}}></bb></h3>",
                         template:"#bbb",
                             components: {

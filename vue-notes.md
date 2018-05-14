@@ -58,7 +58,12 @@
 - <span >{{msg | capitalize }}</span>
 - <span >{{msg | filter | filter}}</span>    多个过滤器
 - <span >{{msg | currency }}</span>   currency：钱 与uppercase  v2.x 没有
-
+- 2.x 好多过滤器废除。lodash工具库
+limitBy filterBy
+Vue.filter('toDou',function(n){
+    return n<10? '1':'2';
+})
+{{msg | toDou('12','5')}}  //参数使用
 ==================
 ### 交互
 - $http (ajax)
@@ -131,7 +136,7 @@ this.$http({
 created          ->  实例已经创建
 beforeCompile   ->  编译之前 v2.x 废除  使用 created 钩子函数替代
 compiled 替换    -> 编译之后， 使用 mounted 钩子函数替代。
-ready            -> 插入到文档
+ready            -> 插入到文档，mounted 替换。
 
 destroyed        -> 销毁
 
@@ -142,7 +147,7 @@ destroyed        -> 销毁
 
  - 代码
  ```
-     <script>
+<script>
       window.onload=function(){
           //创建实例
         var c=new Vue({
@@ -172,8 +177,14 @@ destroyed        -> 销毁
                        
                    }
                },
+               beforeCreate:function(){
+                   console.log("实例刚刚创建");
+               },
                created: function() {
-                   console.log("编译之前");
+                   console.log("编译之前");//实例创建完成。
+               },
+               beforeMount:function(){
+                console.log('模版编译之前');
                },
                mounted:function(){
                    console.log('编译之后');
@@ -188,8 +199,17 @@ destroyed        -> 销毁
                    console.log('ready^');
                      
                },
+               beforeDestroyed:function(){
+                   console.log("销毁")
+               },
                destroyed:function(){
                    console.log("销毁")
+               },
+               beforeUpdate:function(){
+                    console.log("组件更新之前")
+               },
+               updated:function(){
+                    console.log("组件更新之后")
                },
                aa:11
       });
@@ -223,6 +243,7 @@ destroyed        -> 销毁
        <span v-text="msg"></span>
        <div>a=>{{a}} <br/>b=>{{b}}
         </div>
+    </div>
 ```
 
  - ng : $scopt.$watch 
@@ -274,7 +295,9 @@ computed:{
 - v-for="(index ,value) in data"
 - 重复数据  track-by="index"
 - <div v-for="item in items" v-bind:key="item.id">  ---2.x
-
+ <span v-for="(value,key,index) in json"><br>
+            {{index}}.{{key}}.{{value}}
+        </span> 
 ### 过滤器
 - limitBy
 ```
@@ -452,7 +475,8 @@ docment.onkeydown=function(ev){
        // Vue.directive('on').keyCodes.myenter=17;
         //  2.x
         // v-on:keyup.f1 不可用
-        Vue.config.keyCodes.myenter = 17;
+        Vue.config.keyCodes.ctrl = 17;
+        //
 ```
 
 ## 数据监听变化
@@ -779,8 +803,9 @@ var app = new Vue({
 
  -->
  ```
-
- ## 数据通信
+### 动画：
+  7:53
+### 数据通信
 - 子元素获取父组件 数据
 通过属性，传递
 ```
@@ -949,8 +974,97 @@ $destroy 无法删除子组件，作者表示不建议这样做，应当在父�
     {{$route.path}}             当前路径
     {{$route.query | json}}     url参数
 
+### 数据通信：
+```
+<script>
+        window.onload=function(){
+            new Vue({
+                el:'#box',
+                data:{
+                    giveData:{
+                        a:'我是父组件数据'
+                    }
+                },
+                components:{
+                    'child-com':{
+                        props:['msg'],
+                        template:'#child',
+                        methods:{
+                            change(){
+                                //this.msg='被更改了'
+                                this.msg.a='被改了';
+                            }
+                        }
+                    }
+                }
+            });
+        };
+    </script>
+</head>
+<body>
+    <template id="child">
+        <div>
+            <span>我是子组件</span>
+            <input type="button" value="按钮" @click="change">
+            <strong>{{msg.a}}</strong>
+        </div>
+    </template>
 
+    <div id="box">
+        父级: ->{{giveData.a}}
+        <br>
+        <child-com :msg="giveData"></child-com>
+    </div>
+</body>
+```
 
+```
+    <script>
+        window.onload=function(){
+            new Vue({
+                el:'#box',
+                data:{
+                    a:'我是父组件数据'
+                },
+                components:{
+                    'child-com':{
+                        data(){
+                            return {
+                                b:''
+                            }
+                        },
+                        props:['msg'],
+                        template:'#child',
+                        mounted(){
+                            this.b=this.msg;
+                        },
+                        methods:{
+                            change(){
+                                this.b='被改了';
+                            }
+                        }
+                    }
+                }
+            });
+        };
+    </script>
+</head> 
+<body>
+    <template id="child">
+        <div>
+            <span>我是子组件</span>
+            <input type="button" value="按钮" @click="change">
+            <strong>{{b}}</strong>
+        </div>
+    </template>
+
+    <div id="box">
+        父级: ->{{a}}
+        <br>
+        <child-com :msg.sync="a"></child-com>
+    </div>
+</body>
+```
 ### v2.x  路由
 跳转：   https://blog.csdn.net/heliumlau/article/details/61649491
 

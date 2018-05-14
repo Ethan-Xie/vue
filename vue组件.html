@@ -15,7 +15,7 @@
     <script>
 
         //!!组件的一种方式(全局组件)  hello vue
-        var vuehead=Vue.extend({
+        var vuehead=Vue.extend({ 
             /* 必须写成函数，重点！！！
             data:{
                 test:"我是vuehead.data的test值"
@@ -32,13 +32,13 @@
                 }
             },
             template:"<h3 @click='change()'>{{test}}</h3>"
-        });
+        } );
         //console.log(header);
         Vue.component('vuehead',vuehead);
 
         //!!第二种方式
         Vue.component('vueheads',{
-            template:'<h3>我是标题</h3>'
+            template:'<h3>我是标题</h3>' 
         });
 
 
@@ -57,7 +57,7 @@
                         window.alert("hello");
                         
                     }
-                },
+                },  
                 /*
                 components: {
                     //局部组件
@@ -67,10 +67,10 @@
                 components:{
                     'my-aaa':{
                         template:"<h3>我是第二种方式的，局部</h3>"
-                    }
+                    } 
                 }
         });     
-      }
+      } 
     </script>
 </head>
 <body>

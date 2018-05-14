@@ -45,8 +45,14 @@
                        
                    }
                },
+               beforeCreate:function(){
+                   console.log("实例刚刚创建");
+               },
                created: function() {
-                   console.log("编译之前");
+                   console.log("编译之前");//实例创建完成。
+               },
+               beforeMount:function(){
+                console.log('模版编译之前');
                },
                mounted:function(){
                    console.log('编译之后');
@@ -61,8 +67,17 @@
                    console.log('ready^');
                      
                },
+               beforeDestroyed:function(){
+                   console.log("销毁")
+               },
                destroyed:function(){
                    console.log("销毁")
+               },
+               beforeUpdate:function(){
+                    console.log("组件更新之前")
+               },
+               updated:function(){
+                    console.log("组件更新之后")
                },
                aa:11
       });

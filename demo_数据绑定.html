@@ -53,7 +53,10 @@
         <br>
         {{msg2}}
         <br>
-        <!-- {{$index}}  索引的使用 -->
+        <!-- {{$index}}  索引的使用
+            v-for="(value,index) in list"
+            默认添加。去掉index  
+        -->
         <span v-for="(value,index) in arr">
             {{index}}.{{value}}
             <br>
