@@ -32,6 +32,7 @@
         } 
     </style>
     <link rel="stylesheet" href="./lib/bootstrap.min.css">
+    <link rel="stylesheet" href="./lib/animate.css">
     <script src="vue.js"></script>
     <script src="./lib/vue-resource.js"></script> 
     <script>
@@ -63,9 +64,14 @@
 <body>
     <div class="container" id="box">
        <input type="button" value="点击显示隐藏" @click="show=!show">
-       <transition  name="fade" @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
-            <p v-show="show"></p>
+       <transition  enter-active-class="bounceInLeft" leave-active-class="bounceOutRight">
+            <p v-show="show" class="animated"></p>
        </transition>
+
+        <transition-group  enter-active-class="bounceInLeft" leave-active-class="bounceOutRight">
+                <p v-show="show" class="animated" :key="1"></p>
+                <p v-show="show" class="animated" :key="2"></p>
+        </transition-group>
        
     </div>
     <script src="./lib/jquery-1.7.2.js"></script>

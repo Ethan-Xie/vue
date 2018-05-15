@@ -32,44 +32,42 @@
         } 
     </style>
     <link rel="stylesheet" href="./lib/bootstrap.min.css">
+    <link rel="stylesheet" href="./lib/animate.css">
     <script src="vue.js"></script>
     <script src="./lib/vue-resource.js"></script> 
     <script>
-      window.onload=function(){
-        var c=new Vue({
-               el:"#box",
-               data:{
-                    show:false
+        window.onload=function(){
+            new Vue({
+                el:'#box',
+                data:{
+                    show:'',
+                    list:['apple','banana','orange','pear']
                 },
-               methods:{
-                   get:function(){
-                      window.alert("hello");
-                       
-                   },
-                   beforeEnter:function(el){
-                       window.console.log("动画进入之前");
-                       //el  就是你要运动的元素
-                       el.style.background='blue';
-
-                   },
-                   enter:function(){
-                       window.console.log("动画进入之前");
-                   }
-               }
-      });
-      }
+                computed:{
+                    lists:function(){
+                        var arr=[];
+                        this.list.forEach(function(val){
+                            if(val.indexOf(this.show)!=-1){
+                                arr.push(val);
+                            }
+                        }.bind(this));
+                        return arr;
+                    }
+                }
+            });
+        };
     </script>
 </head>
 <body>
-    <div class="container" id="box">
-       <input type="button" value="点击显示隐藏" @click="show=!show">
-       <transition  name="fade" @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
-            <p v-show="show"></p>
-       </transition>
-       
+    <div id="box">
+        <input type="text" v-model="show">
+
+        <transition-group enter-active-class="zoomInLeft" leave-active-class="zoomOutRight">
+            <p v-show="show" class="animated" v-for="(val,index) in lists" :key="index">
+                {{val}}
+            </p>
+        </transition-group>
     </div>
-    <script src="./lib/jquery-1.7.2.js"></script>
-    <script src="./lib/bootstrap.js"></script>
 </body>
 </html>
 

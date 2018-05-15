@@ -558,6 +558,43 @@ style:
     }
 ```
 
+animate  使用
+```
+    <script>
+        window.onload=function(){
+            new Vue({
+                el:'#box',
+                data:{
+                    show:'',
+                    list:['apple','banana','orange','pear']
+                },
+                computed:{
+                    lists:function(){
+                        var arr=[];
+                        this.list.forEach(function(val){
+                            if(val.indexOf(this.show)!=-1){
+                                arr.push(val);
+                            }
+                        }.bind(this));
+                        return arr;
+                    }
+                }
+            });
+        };
+    </script>
+</head>
+<body>
+    <div id="box">
+        <input type="text" v-model="show">
+
+        <transition-group enter-active-class="zoomInLeft" leave-active-class="zoomOutRight">
+            <p v-show="show" class="animated" v-for="(val,index) in lists" :key="index">
+                {{val}}
+            </p>
+        </transition-group>
+    </div>
+</body>
+```
 ###  animate ---> <!-- 控制数据的值切换显示隐藏 -->
 使用方法
 ```
@@ -804,7 +841,20 @@ var app = new Vue({
  -->
  ```
 ### 动画：
-  7:53
+  .fade-enter{}   //初始状态
+  .fade-enter-active{} //变化成什么样 -> 当元素出来的时候
+
+  .fade-leave{}  
+  .fade-leave-active{} //变化成什么样 -> 当元素消失/离开 的时候
+```
+    @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter" 
+        <div class="container" id="box">
+       <input type="button" value="点击显示隐藏" @click="show=!show">
+       <transition  enter-active-class="bounceInLeft" leave-active-class="bounceOutRight">
+            <p v-show="show" class="animated"></p>
+       </transition>
+    </div>
+```
 ### 数据通信
 - 子元素获取父组件 数据
 通过属性，传递
