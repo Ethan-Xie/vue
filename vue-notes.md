@@ -1215,3 +1215,81 @@ babel-preset-es2015  babel-runtime
 所有的jquery版本信息    npm view vue-loader versions
 最新的版本    npm view vue-loader version
 现在指定版本：vue-loader@14.2.2  
+ 
+
+
+ ### UI 组件名称
+ 开源，为了提高开发效率
+
+bootstrap,elementUI,MintUI……
+拿来主义
+
+###   elementUI  全部引入
+cnpm i element-ui -S
+npm install element-ui --save-dev
+//i install D  --save-dev   S --save
+
+引入：
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+
+Vue.use(ElementUI)
+
+### elementUI less
+<style scope lang="less">
+    @color:red;
+    .my-grid{
+        border:1px solid @color;
+        height:50px;
+    }
+</style>
+
+###   elementUI  部分引入
+
+按需引入
+
+借助 babel-plugin-component，我们可以只引入需要的组件，以达到减小项目体积的目的。
+
+首先，安装 babel-plugin-component：
+
+npm install babel-plugin-component -D
+然后，将 .babelrc 修改为：
+
+{ 
+  "presets": [["es2015", { "modules": false }]],
+  "plugins": [
+    [
+      "component",
+      {
+        "libraryName": "element-ui",
+        "styleLibraryName": "theme-chalk"
+      }
+    ]
+  ]
+}
+接下来，如果你只希望引入部分组件，比如 Button 和 Select，那么需要在 main.js 中写入以下内容：
+```
+import Vue from 'vue';
+import { Button, Select } from 'element-ui';
+import App from './App.vue';
+
+Vue.component(Button.name, Button);
+Vue.component(Select.name, Select);
+/* 或写为
+ * Vue.use(Button)
+ * Vue.use(Select)
+ */
+
+new Vue({
+  el: '#app',
+  render: h => h(App)
+});
+```
+完整组件列表和引入方式（完整组件列表以 components.json 为准）
+
+### MintUI
+文档  http://mint-ui.github.io/docs/#/zh-cn2 
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+### axios
+axios.get(xxx,{}).then().catch()
