@@ -18,13 +18,13 @@ export default new Router({
         component: Home
       },
       {
-        path: 'reg',
+        path: '/reg',
         name: 'Reg',
         component: Home
       }]
     },
     {
-      path: '/new',
+      path: '/home',
       name: 'Home',
       component: Home
     }

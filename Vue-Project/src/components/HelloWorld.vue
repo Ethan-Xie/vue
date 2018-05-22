@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h2>hello xiethan</h2>
+    <h2>hello Helloworld</h2>
      <ul>
      <li><router-link to="/home">主页</router-link></li>
      <li><router-link to="/new">新闻</router-link></li>
@@ -15,7 +15,7 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to my vue --by xiethan'
+      msg: 'Welcome to Helloworld Components'
     }
   }
 }
