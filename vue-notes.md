@@ -1293,3 +1293,14 @@ new Vue({
 
 ### axios
 axios.get(xxx,{}).then().catch()
+
+### 自定义vue全局组件的使用
+
+Vue.use()
+Vue.use(Vuesource)
+--------
+自定义vue全局组件:
+    使用：
+        |-loading/
+                |-index.js      //导出组件
+                |-Loading.vue   //Loading组件（三部分组成:template,style,script）
