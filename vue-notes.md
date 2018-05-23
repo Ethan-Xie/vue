@@ -1304,3 +1304,9 @@ Vue.use(Vuesource)
         |-loading/
                 |-index.js      //导出组件
                 |-Loading.vue   //Loading组件（三部分组成:template,style,script）
+
+
+### vuex: Devtools
+官网： http://vuex.vuejs.org/
+
+12:21
