@@ -1309,4 +1309,8 @@ Vue.use(Vuesource)
 ### vuex: Devtools
 官网： http://vuex.vuejs.org/
 
-12:21
+vuex  提供两个非常靠谱的方法：
+        mapActions  管理所有事件（行为）
+        mapGetters  获取数据
+
+cnpm install  vuex -D
