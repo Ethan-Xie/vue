@@ -1314,3 +1314,46 @@ vuex  提供两个非常靠谱的方法：
         mapGetters  获取数据
 
 cnpm install  vuex -D
+
+13：00
+
+
+
+
+
+### vue 访问新闻客户端项目
+
+1.拿到静态页面，（直接vue边布局，边写）
+2.假数据
+3.规划组件
+
+做项目的基本流程
+    1.规划组件的结构
+        nav.vue
+        header.vue
+        home.vue
+        ……
+        
+    2.编写对应的路由
+        vue-route
+
+    3.具体些每个组件的功能
+
+
+ 建议：
+    1.一些公共的jquery、jquery插件，一般在index.html文件里面引入
+    2.main.js require/import
+    require 全局引入 
+
+
+借用别人的项目需要：
+    下载别人的项目模块：vuex vue-router axios -D
+
+    架构：
+        assets -> 静态资源 img,css,js
+
+        想在js里面引入css模块：style
+
+
+
+    
