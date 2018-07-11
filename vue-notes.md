@@ -1353,6 +1353,7 @@ cnpm install  vuex -D
         assets -> 静态资源 img,css,js
 
         想在js里面引入css模块：style
+        23:29
 
 
 
