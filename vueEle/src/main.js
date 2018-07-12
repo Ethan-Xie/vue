@@ -12,6 +12,8 @@ import vueTap from 'v-tap'
 import fastclick from 'fastclick'
 import Vuex from 'vuex'
 
+Vue.use(vueTap)
+Vue.use(Vuex)
 
 Vue.config.productionTip = false
 
