@@ -5,18 +5,13 @@ import App from './App'
 import router from './router'
 
 // ele 新增对的
-import goods from './components/goods/goods'
-import ratings from './components/ratings/ratings'
-import seller from './components/seller/seller'
-import vueTap from 'v-tap'
-import fastclick from 'fastclick'
-import Vuex from 'vuex'
-
-Vue.use(vueTap)
-Vue.use(Vuex)
+// import goods from './components/goods/goods'
+// import ratings from './components/ratings/ratings'
+// import seller from './components/seller/seller'
+// import vueTap from 'v-tap'
+// import fastclick from 'fastclick'
 
 Vue.config.productionTip = false
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
