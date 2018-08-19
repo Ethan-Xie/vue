@@ -864,7 +864,7 @@ var app = new Vue({
                 <bb :m="msg" :my-msg="msg"></bb>
             </h3>
         </script>
-    <script>  
+<script>  
       window.onload=function(){ 
             var c=new Vue({
                 el:"#box",
