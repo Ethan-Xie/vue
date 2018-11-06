@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title> 竺毅先森 —— www.axie.cc</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <style>
+        
+    </style>
+    <link rel="stylesheet" href="./lib/bootstrap.min.css">
+    <script src="vue.js"></script>
+
+
+    
+</head>
+<body>
+    <div class="container" id="app">
+        <h1>{{test}}</h1>
+        <app>
+           <div>
+              我会被 components 替换
+           </div>
+        </app>
+    </div>
+
+
+    <script src="./lib/jquery-1.7.2.js"></script>
+    <script src="./lib/bootstrap.js"></script>
+
+</body>
+
+  <script type="text/javascript">
+      window.onload=function(){
+        new Vue({
+          el:"#app",
+          data:{
+            test:'it is a test'
+          },
+          components: {
+            'app':{
+              data:function(){
+                  return{
+                    msg:'app里的message'
+                  }
+              },
+              template:'<div id="app">11</div>'
+            }
+          },
+          template:'<div id="app">22</div>'
+        })
+      }
+  </script>
+</html>
+<!-- 
+var allComps = {};
+allComps['CompB'] = {
+  name: 'comp-b',
+  props: ['level'],
+  template: `<div>
+    B{{level}}
+    <div v-if="level<11111">
+      <comp-a :level="level+1"></comp-a>
+    </div>
+  </div>`,
+  components: allComps
+
+};
+allComps['CompA'] = {
+  name: 'comp-a',
+  props: ['level'],
+  template: `<div>
+    A{{level}}
+    <div v-if="level<11111">
+      <comp-b :level="level+1"></comp-b>
+    </div>
+  </div>`,
+  components: allComps
+};
+allComps['App'] = {
+  template: '<div>Start<comp-a level="1"></comp-a></div>',
+  components: allComps
+};
+
+var app = new Vue({
+  el: '#app',
+  components: allComps
+});
+
+ -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
